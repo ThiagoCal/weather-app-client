@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { fetchCity, getKey, getCity } from "../Redux/action";
 import CurrentWeather from "./CurrentWeather";
@@ -19,10 +19,23 @@ export const Search = (props) => {
   // const currentWeather = useSelector((state) => state.weather);
   // console.log(currentWeather);
 
+  const location = useLocation();
+  const stateKey = location.state?.keyC?.key;
+  const stateCity = location.state?.keyC?.city;
+  // console.log("stateKey----->>>", stateKey);
+  // if (stateCity) {
+  //   console.log("state City ---->", stateCity, stateKey);
+  // }
+
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchCity(typed));
-  }, [typed]);
+    if (typed) {
+      dispatch(fetchCity(typed));
+    } else if (stateKey) {
+      dispatch(getKey(stateKey));
+      dispatch(getCity(stateCity));
+    }
+  }, [typed, stateKey]);
 
   let keyCity = "";
   let cityName = "";
@@ -79,7 +92,7 @@ export const Search = (props) => {
       {keyCity ? (
         <>
           <CurrentWeather />
-          {/* <FiveDaysWeather /> */}
+          <FiveDaysWeather />
           {/* <Favorites /> */}
         </>
       ) : (

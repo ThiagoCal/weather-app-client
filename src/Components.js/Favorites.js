@@ -78,7 +78,15 @@ export const Favorites = (props) => {
                       °C
                     </div>
                   </p>
-                  {/* <Link to=></Link> */}
+                  <p>{favorite.keyCity}</p>
+                  <Link
+                    to="/"
+                    state={{
+                      keyC: { key: favorite.keyCity, city: favorite.city },
+                    }}
+                  >
+                    Open
+                  </Link>
                   {/* <button type="button" onClick={handleFavorite}>
                 {!isFavorite ? "Add to favorites" : "Remove from favorites"}
               </button> */}

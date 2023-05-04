@@ -23,9 +23,7 @@ function App() {
             path="/favorites"
             element={
               <>
-                {/* <Navbar /> */}
                 <Favorites />
-                {/* <Footer /> */}
               </>
             }
           ></Route>

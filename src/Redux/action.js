@@ -39,7 +39,7 @@ export const getWeather = (key) => (dispatch, getState) => {
 };
 
 export const getFiveDaysWeather = (key) => (dispatch, getState) => {
-  console.log("hi from action");
+  // console.log("hi from action");
   fetch(
     `http://dataservice.accuweather.com/forecasts/v1/daily/5day/${key}?apikey=GW05i5arColtJEKIprH2Pstj2Z0ODL8W&metric=true`
   )
@@ -102,6 +102,7 @@ export const getFavorites = (favs) => async (dispatch, getState) => {
         const cityJson = await cityRes.json();
         favObj.weather = cityJson;
         favObj.city = fav.city;
+        favObj.keyCity = fav.keyCity;
         return favObj;
       })
     );
