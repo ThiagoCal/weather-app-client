@@ -8,7 +8,7 @@ import Footer from "./Components.js/Footer";
 
 function App() {
   return (
-    <div className="App bg-slate-50">
+    <div className="App">
       <Router>
         <Routes>
           <Route
