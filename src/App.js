@@ -3,19 +3,21 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Search from "./Components.js/Search";
 import Favorites from "./Components.js/Favorites";
+import Navbar from "./Components.js/Navbar";
+import Footer from "./Components.js/Footer";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App bg-slate-50">
       <Router>
         <Routes>
           <Route
             path="/"
             element={
               <>
-                {/* <Navbar /> */}
+                <Navbar />
                 <Search />
-                {/* <Footer /> */}
+                <Footer />
               </>
             }
           ></Route>
@@ -23,7 +25,9 @@ function App() {
             path="/favorites"
             element={
               <>
+                <Navbar />
                 <Favorites />
+                <Footer />
               </>
             }
           ></Route>

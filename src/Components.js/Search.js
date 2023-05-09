@@ -58,41 +58,60 @@ export const Search = (props) => {
 
   return (
     <>
-      <div>Home</div>
-      <label for="cities">Choose a city:</label>
-      <input
-        type="text"
-        list="cities"
-        value={typed}
-        onChange={(e) => {
-          setTyped(e.target.value);
-          console.log("option", e.target.option);
-        }}
-      ></input>
-      <button type="button" onClick={(e) => handleClick(e)}>
-        Search
-      </button>
-      <br />
-      {/* <Link to={`/favorites`}>Favorites</Link> */}
+      <div class="flex items-center justify-center py-8">
+        {/* <div class="font-bold text-2xl mb-4">Home</div> */}
+        <div class="flex flex-col items-center">
+          <label for="cities" class="font-medium text-lg mb-2">
+            Choose a city:
+          </label>
+          <input
+            type="text"
+            list="cities"
+            value={typed}
+            onChange={(e) => {
+              setTyped(e.target.value);
+              console.log("option", e.target.option);
+            }}
+            class="py-2 px-4 border border-gray-400 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+          ></input>
+          <datalist id="cities" class="mt-2">
+            {arrLocation ? (
+              arrLocation.map((loc) => {
+                console.log("loc", loc);
+                return (
+                  <option id={loc.Key} value={loc.LocalizedName}>
+                    {loc.LocalizedName}
+                  </option>
+                );
+              })
+            ) : (
+              <>Nothing</>
+            )}
+          </datalist>
+        </div>
+        <button
+          type="button"
+          onClick={(e) => handleClick(e)}
+          class="self-end ml-2 py-2 px-4 bg-blue-500 text-white rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        >
+          Search
+        </button>
+      </div>
 
-      <datalist id="cities">
-        {arrLocation ? (
-          arrLocation.map((loc) => {
-            console.log("loc", loc);
-            return (
-              <option id={loc.Key} value={loc.LocalizedName}>
-                {loc.LocalizedName}
-              </option>
-            );
-          })
-        ) : (
-          <>Nothing</>
-        )}
-      </datalist>
       {keyCity ? (
         <>
-          <CurrentWeather />
-          <FiveDaysWeather />
+          <h1 className="self-center font-medium leading-tight text-neutral-800 text-xl mb-3">
+            Current Weather
+          </h1>
+          <div className="flex justify-center align-center">
+            <CurrentWeather />
+          </div>
+          <>
+            <h2 className="text-xl font-medium leading-tight text-neutral-800 mt-5 p-2">
+              Five Days Forecast
+            </h2>
+            <FiveDaysWeather />
+          </>
           {/* <Favorites /> */}
         </>
       ) : (
