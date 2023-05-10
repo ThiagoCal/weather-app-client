@@ -14,7 +14,7 @@ export const getCity = (data) => (dispatch) => {
 
 export const fetchCity = (city) => (dispatch, getState) => {
   fetch(
-    `https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=GW05i5arColtJEKIprH2Pstj2Z0ODL8W&q=${city}`
+    `https://dataservice.accuweather.com/locations/v1/cities/autocomplete?apikey=uGtjXOyZb7AdDcSSYR52rO7G69DHlr7H&q=${city}`
   )
     .then((res) => res.json())
     .then((data) => {
@@ -27,7 +27,7 @@ export const fetchCity = (city) => (dispatch, getState) => {
 
 export const getWeather = (key) => (dispatch, getState) => {
   fetch(
-    `https://dataservice.accuweather.com/forecasts/v1/daily/1day/${key}?apikey=GW05i5arColtJEKIprH2Pstj2Z0ODL8W&metric=true`
+    `https://dataservice.accuweather.com/forecasts/v1/daily/1day/${key}?apikey=uGtjXOyZb7AdDcSSYR52rO7G69DHlr7H&metric=true`
   )
     .then((res) => res.json())
     .then((data) => {
@@ -41,7 +41,7 @@ export const getWeather = (key) => (dispatch, getState) => {
 export const getFiveDaysWeather = (key) => (dispatch, getState) => {
   // console.log("hi from action");
   fetch(
-    `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${key}?apikey=GW05i5arColtJEKIprH2Pstj2Z0ODL8W&metric=true`
+    `https://dataservice.accuweather.com/forecasts/v1/daily/5day/${key}?apikey=uGtjXOyZb7AdDcSSYR52rO7G69DHlr7H&metric=true`
   )
     .then((res) => res.json())
     .then((data) => {
@@ -97,7 +97,7 @@ export const getFavorites = (favs) => async (dispatch, getState) => {
       favs.map(async (fav) => {
         let favObj = {};
         const cityRes = await fetch(
-          `http://dataservice.accuweather.com/forecasts/v1/daily/1day/${fav.keyCity}?apikey=GW05i5arColtJEKIprH2Pstj2Z0ODL8W&metric=true`
+          `http://dataservice.accuweather.com/forecasts/v1/daily/1day/${fav.keyCity}?apikey=uGtjXOyZb7AdDcSSYR52rO7G69DHlr7H&metric=true`
         );
         const cityJson = await cityRes.json();
         favObj.weather = cityJson;

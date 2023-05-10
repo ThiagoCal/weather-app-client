@@ -2,16 +2,17 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { getFavorites } from "../Redux/action";
+import { getFavorites, removeFavorites } from "../Redux/action";
 
 export const Favorites = (props) => {
   const dispatch = useDispatch();
   const favorites = useSelector((state) => state.favorites);
+  const favoriteWeather = useSelector((state) => state.fav_weather);
+
   useEffect(() => {
-    if (favorites) {
-      console.log("hi from favorites");
-      dispatch(getFavorites(favorites));
-    }
+    const localFavs = JSON.parse(localStorage.getItem("favorites")) || [];
+    console.log("LOCAL FAVS ", localFavs);
+    dispatch(getFavorites(localFavs));
   }, [favorites]);
 
   const checkIcon = (icon) => {
@@ -28,10 +29,14 @@ export const Favorites = (props) => {
     return formattedDate;
   };
 
-  const favoriteWeather = useSelector((state) => state.fav_weather[0]);
+  const handleFavorite = (keyCity) => {
+    console.log("handle favorite -->", keyCity);
+    dispatch(removeFavorites(keyCity));
+  };
+
   console.log("favorites weather", favoriteWeather);
 
-  if (favoriteWeather) {
+  if (favoriteWeather && favoriteWeather.length > 0) {
     {
       favoriteWeather.map((favorite) => {
         console.log("favorite", favorite);
@@ -94,14 +99,23 @@ export const Favorites = (props) => {
                 >
                   Open
                 </Link>
-                {/* <button type="button" onClick={handleFavorite}>
-                {!isFavorite ? "Add to favorites" : "Remove from favorites"}
-              </button> */}
+                <button
+                  type="button"
+                  onClick={() => handleFavorite(favorite.keyCity)}
+                >
+                  Remove from favorites
+                </button>
               </div>
             </div>
             // </div>
           );
         })}
+      </div>
+    );
+  } else {
+    return (
+      <div className="mt-5">
+        <span>No favorites found</span>
       </div>
     );
   }

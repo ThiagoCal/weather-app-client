@@ -37,7 +37,7 @@ export const FiveDaysWeather = (props) => {
   };
 
   return (
-    <div className="container mx-auto mt-3 flex gap-2">
+    <div className=" mt-3 flex gap-2">
       {fiveDays ? (
         fiveDays.DailyForecasts.map((eachDayForecast) => (
           <div class="block w-1/4 rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] dark:bg-neutral-700">

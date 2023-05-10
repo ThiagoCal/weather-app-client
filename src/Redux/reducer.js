@@ -23,27 +23,47 @@ const reducer = (state = initState, action = {}) => {
     case "GET_FIVE_DAYS":
       console.log(action.payload);
       return { ...state, fivedays: { fivedays: action.payload } };
+    // case "ADD_FAVORITE":
+    //   if (state.favorites.some((e) => e.keyCity === action.payload.keyCity)) {
+    //     /* vendors contains the element we're looking for */
+    //     console.log("repeated data");
+    //     return { ...state, favorites: [...state.favorites] };
+    //   }
+    //   localStorage.setItem(
+    //     "favorites",
+    //     JSON.stringify([...state.favorites, action.payload])
+    //   );
+    //   return { ...state, favorites: [...state.favorites, action.payload] };
+    // case "REMOVE_FAVORITE":
+    //   console.log("action payload", action.payload);
+    //   const indexOfFavorite = state.favorites.findIndex((object) => {
+    //     return object.keyCity === action.payload;
+    //   });
+    //   if (indexOfFavorite > -1) {
+    //     state.favorites.splice(indexOfFavorite, 1);
+    //     localStorage.setItem("favorites", JSON.stringify(state.favorites));
+    //   }
+    //   return { ...state, favorites: [...state.favorites] };
+
     case "ADD_FAVORITE":
-      if (state.favorites.some((e) => e.keyCity === action.payload.keyCity)) {
-        /* vendors contains the element we're looking for */
-        console.log("repeated data");
-        return { ...state, favorites: [...state.favorites] };
-      }
-      localStorage.setItem(
-        "favorites",
-        JSON.stringify([...state.favorites, action.payload])
+      const isFavoriteExist = state.favorites.some(
+        (e) => e.keyCity === action.payload.keyCity
       );
-      return { ...state, favorites: [...state.favorites, action.payload] };
-    case "REMOVE_FAVORITE":
-      console.log("action payload", action.payload);
-      const indexOfFavorite = state.favorites.findIndex((object) => {
-        return object.keyCity === action.payload;
-      });
-      if (indexOfFavorite > -1) {
-        state.favorites.splice(indexOfFavorite, 1);
-        localStorage.setItem("favorites", JSON.stringify(state.favorites));
+      if (isFavoriteExist) {
+        console.log("repeated data");
+        return state;
+      } else {
+        const updatedFavorites = [...state.favorites, action.payload];
+        localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+        return { ...state, favorites: updatedFavorites };
       }
-      return { ...state, favorites: [...state.favorites] };
+
+    case "REMOVE_FAVORITE":
+      const filteredFavorites = state.favorites.filter(
+        (favorite) => favorite.keyCity !== action.payload
+      );
+      localStorage.setItem("favorites", JSON.stringify(filteredFavorites));
+      return { ...state, favorites: filteredFavorites };
 
     case "GET_FAVORITES":
       console.log("get favorites", action.payload);
@@ -59,7 +79,7 @@ const reducer = (state = initState, action = {}) => {
       // }
       return {
         ...state,
-        fav_weather: [...state.fav_weather, action.payload],
+        fav_weather: action.payload,
       };
     case "LOADING":
       return { ...state, loading: true };

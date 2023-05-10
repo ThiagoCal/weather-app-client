@@ -99,7 +99,7 @@ export const Search = (props) => {
       </div>
 
       {keyCity ? (
-        <>
+        <div className="container mx-auto" style={{ maxWidth: "960px" }}>
           <h1 className="self-center font-medium leading-tight text-neutral-800 text-xl mb-3">
             Current Weather
           </h1>
@@ -113,7 +113,7 @@ export const Search = (props) => {
             <FiveDaysWeather />
           </>
           {/* <Favorites /> */}
-        </>
+        </div>
       ) : (
         <></>
       )}
