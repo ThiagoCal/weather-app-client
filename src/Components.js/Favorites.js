@@ -43,10 +43,12 @@ export const Favorites = (props) => {
       });
     }
     return (
-      <div className=" container mx-auto mt-3 gap-x-2 flex">
+      <div
+        className=" container mx-auto mt-3 gap-x-2 flex"
+        style={{ maxWidth: "960px" }}
+      >
         {favoriteWeather.map((favorite) => {
           return (
-            // <div className="container mx-auto mt-3 flex ">
             <div class="block rounded-lg w-2/4 bg-white shadow-lg dark:bg-neutral-700">
               <div class="p-6 flex flex-col">
                 <h5 class="mb-2 text-xl font-medium leading-tight text-neutral-800 dark:text-neutral-50">
@@ -107,7 +109,6 @@ export const Favorites = (props) => {
                 </button>
               </div>
             </div>
-            // </div>
           );
         })}
       </div>
